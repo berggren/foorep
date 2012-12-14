@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <title>foorep</title>
+    <link 
+        rel='stylesheet' 
+        type='text/css'
+        href='/static/bootstrap/css/bootstrap.min.css'>
+    <link 
+        rel='stylesheet' 
+        type='text/css'
+        href='/static/css/style.css'>
+    <script
+        type="text/javascript" 
+        language="javascript" 
+        src="bootstrap/js/bootstrap.min.js"></script>
+    <script
+        type="text/javascript" 
+        language="javascript"
+        src="/static/js/jquery-1.8.3.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".upload-link").click(function(){
+                $(".upload").toggle();
+            });
+            $(".submit").click(function(){
+                $("#main").hide();
+                $("#progress").show()
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="main">
+                    <br><br><br><br><br>
+                    <div style="text-align:center;">
+                        <span class="logo" style="font-size:58px;color:#444">   foo<em>rep</em>
+                        </span>
+                        <br><br>
+                        <form action="/search">
+                            <input 
+                                class="searchinput" 
+                                style="width:400px;"
+                                type="text", 
+                                name="q">
+                                <br><br>
+                            <input 
+                                type="submit" 
+                                class="btn" 
+                                value="Search">
+                            <br>
+                        </form>
+                        You can also <a href="#" class="upload-link">upload</a> new malware samples
+                        <br><br>
+                        <div class="upload hide">
+                            <form action="upload" method="post" enctype="multipart/form-data">
+                                <input type="file" name="fh" />
+                                <input class="submit" type="submit" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="progress" class="hide" style="text-align:center">
+                    <div style="text-align:center;">
+                        <br><br><br><br><br><br><br><br><br><br>
+                        <img src="/static/img/load.gif">
+                        <br><br>
+                        saving and analyzing..
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

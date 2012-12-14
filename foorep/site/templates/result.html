@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            {% if not result %}
+                No result
+            {% endif %}
+            {% for malware in result %}
+                <a class="reslink" href="/file/{{ malware.uuid }}/">{{ malware.meta.filename }}</a>
+                <br>
+                {{ malware.meta.hash.sha1 }}
+                <br><br>
+            {% endfor %}        
+        </div>
+    </div>
+</div>
+{% endblock %}
+

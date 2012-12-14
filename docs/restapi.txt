@@ -1,0 +1,2 @@
+foorep has a RESTful API. I will document it here soon.
+ - johan 2012
