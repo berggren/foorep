@@ -1,0 +1,8 @@
+<table class="table table-striped table-bordered">
+    {% for k, v in item.annotation.items() %}
+        <tr>
+            <td><strong>{{ k|replace("_", " ")}}</strong></td>
+            <td>{{ v }}</td>
+        </tr>
+    {% endfor %}
+</table>

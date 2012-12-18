@@ -2,36 +2,24 @@
 # This file is part of foorep
 # See the file 'LICENSE.txt' for copying permission.
 
-from pymongo import Connection
-from pymongo import errors as mongoerr
-from gridfs import GridFS
 import os
-import imp
-import hashlib
-from glob import glob
-from uuid import uuid4
-from datetime import datetime
 import sys
+import imp
+import glob
+import uuid
+import hashlib
+import datetime
+
+import pymongo
+import gridfs
 
 try:
     import magic
 except ImportError:
     magic = None
 
-class PluginMount(type):
-    def __init__(self, name, bases, attrs):
-        if not hasattr(self, 'plugins'):
-            self.plugins = []
-        else:
-            self.plugins.append(self)
-    def get_plugins(self, *args, **kwargs):
-        return [p(*args, **kwargs) for p in self.plugins]
-
-class Plugin:
-    __metaclass__ = PluginMount
-
 class Repository:
-    """Repository for malware samples."""
+    """Repository for forensic artifacts"""
     
     def __init__(self, database='foorep', collection='repository'):
         """Creates a new or use an existing database and collection in
@@ -41,15 +29,19 @@ class Repository:
           - `database` (optional) Name of the MongoDB database
           - `collection` (optional) Name of the collection
         """
+        self.dbname = database
+        self.collname = collection
         try:
-            self.db = Connection()[database]
+            self.db = pymongo.Connection()[database]
             self.collection = self.db[collection]
-            self.fs = GridFS(self.db)
-        except mongoerr.ConnectionFailure:
-            print "Connection ERROR, is mongoDB alive?"
+            self.fs = gridfs.GridFS(self.db)
+        except pymongo.errors.ConnectionFailure:
+            print("ERROR: Could not connect to collection %s on database %s" % (
+                    self.dbname, 
+                    self.collname))
             sys.exit()
         plugin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"plugins")
-        for path in glob(os.path.join(plugin_dir,'[!_]*.py')): 
+        for path in glob.glob(os.path.join(plugin_dir,'[!_]*.py')): 
             name, ext = os.path.splitext(os.path.basename(path))
             imp.load_source(name, path)
         self.plugins = Plugin.get_plugins()
@@ -63,10 +55,10 @@ class Repository:
         if magic:
             filetype = magic.from_file(filepath)
         else:
-            filetype = 'No magic support'
+            filetype = 'N/A'
 
         document = {
-            "uuid": uuid4().hex,
+            "uuid": uuid.uuid4().hex,
             "file": gridfile,
             "user": None,
             "meta": {
@@ -82,8 +74,8 @@ class Repository:
                     },
                 },
             "annotations": {},
-            "created": datetime.now(),
-            "updated": datetime.now()
+            "created": datetime.datetime.now(),
+            "updated": datetime.datetime.now()
             }
         return document
 
@@ -142,7 +134,7 @@ class Repository:
         document = self.get(id)
         annotations = document.get('annotations')
         new_annotation = annotations.setdefault(annotation.get('type'), [])
-        new_annotation.append({"created": datetime.now(), "value": annotation.get('value')})
+        new_annotation.append({"created": datetime.datetime.now(), "annotation": annotation.get('annotation')})
         self.collection.save(document)
         return True
 
@@ -187,5 +179,17 @@ class Repository:
 
     def list(self, limit=0):
         return self.collection.find().limit(limit)
+
+class PluginMount(type):
+    def __init__(self, name, bases, attrs):
+        if not hasattr(self, 'plugins'):
+            self.plugins = []
+        else:
+            self.plugins.append(self)
+    def get_plugins(self, *args, **kwargs):
+        return [p(*args, **kwargs) for p in self.plugins]
+
+class Plugin:
+    __metaclass__ = PluginMount
 
 

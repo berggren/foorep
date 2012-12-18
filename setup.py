@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='foorep',
-    version='0.1.0',
+    version='0.1.1',
     author='Johan Berggren',
     author_email='jbn@klutt.se',
     packages=['foorep', 'foorep.test'],
@@ -23,8 +23,9 @@ setup(
             'site/static/js/*',
             'site/static/css/*',
             'site/static/img/*',
-            'site/templates/*',
             'site/static/bootstrap/js/*',
+            'site/templates/plugins/*',
+            'site/templates/*.html',
             'site/static/bootstrap/css/*',
             'site/static/bootstrap/img/*']
         },

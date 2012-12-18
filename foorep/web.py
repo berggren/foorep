@@ -24,9 +24,6 @@ env = jinja2.Environment(
         autoescape=guess_autoescape,
         extensions=['jinja2.ext.autoescape'])
 
-print site_dir
-
-
 def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     return value.strftime(format)
 
@@ -59,7 +56,7 @@ class Annotate:
         self.repo = repo
     @cherrypy.expose
     def default(self, uuid, type, value):
-        annotation = {"type":type, "value":value}
+        annotation = {"type": type, "annotation": value}
         self.repo.annotate(uuid, annotation)
         raise cherrypy.HTTPRedirect("/file/%s" % uuid)
 

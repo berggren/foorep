@@ -14,11 +14,7 @@ body {
 
 #header {
     margin-bottom:20px;
-    background-image: -moz-linear-gradient(top, #333 0%, #111 100%);
-    background-image: -o-linear-gradient(top, #333 0%, #111 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333), color-stop(1, #111));
-    background-image: -webkit-linear-gradient(top, #333 0%, #111 100%);
-    background-image: linear-gradient(to bottom, #333 0%, #111 100%);
+    background:#333;
 }
 
 #header ul {

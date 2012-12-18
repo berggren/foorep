@@ -3,26 +3,22 @@
 # See the file 'LICENSE.txt' for copying permission.
 
 from foorep import Plugin
+import pyexiv2
 
 class Exif(Plugin):
     def analyze(self, path):
         try:
-            import pyexiv2
-        except ImportError:
-            return
-        try:
             exif = pyexiv2.ImageMetadata(path)
             exif.read()
-            self.tags = exif.exif_keys
         except IOError:
             return None
+        self.tags = exif.exif_keys
+        result = {
+            "type": "exif",
+            "name": "EXIF",
+            "annotation": {},
+        }
         if self.tags:
-            result = {
-                    "type": "exif",
-                    "value": {},
-            }
             for tag in exif.exif_keys:
-                result['value'][tag.replace(".", "_")] = exif[tag].human_value
-        else:
-            result = None
+                result['annotation'][tag.replace(".", "_")] = exif[tag].human_value
         return result 

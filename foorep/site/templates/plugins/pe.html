@@ -1,0 +1,23 @@
+<table class="table table-striped table-bordered">
+    {% for k, v in item.annotation.overview.items() %}
+        <tr>
+            <td><strong>{{ k|replace("_", " ")}}</strong></td>
+            <td>{{ v }}</td>
+        </tr>
+    {% endfor %}
+    <table>
+
+        <h3>Imports</h3>
+
+<table class="table table-striped table-bordered">
+    {% for k, v in item.annotation.imports.items() %}
+        <tr>
+            <td><strong>{{ k|replace("_", ".")}}</strong></td>
+            <td>
+            {% for imp in v %}
+            {{imp}}<br>
+            {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

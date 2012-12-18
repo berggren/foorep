@@ -82,7 +82,8 @@
                     {% else %}
                         <li>
                     {% endif %}
-                        <a href="#{{ type }}" class="tablink" data-toggle="tab">{{ type }}</a>
+                        <a href="#{{ type }}" class="tablink"
+                            data-toggle="tab">{{ type }}</a>
                     </li>
                     {% endfor %}
                     {% if b64img %}
@@ -92,7 +93,7 @@
                         </li>
                     {% endif %}
 
-            </ul>
+                </ul>
             <div class="tab-content">
                 {% for type, annotation in file.annotations.items() %}
                     {% if loop.index == 1 %}
@@ -106,31 +107,13 @@
                                 {{ item.created|datetimeformat }}
                             {% endif %}
                             <br>
-                            {{ item.value }}
-                            {% elif type == "pefile" %}
-                            <table class="table table-striped
-                                table-bordered">
-                            {% for k, v in item.value.items() %}
-                            <tr>
-                                <td><strong>{{ k|replace("_", " ")}}</strong></td>
-                                <td>{{ v }}</td>
-                            </tr>
-                                {% endfor %}
-                            </table>
-                            {% elif type == "exif" %}
-                            <table class="table table-striped
-                                table-bordered">
-                            {% for k, v in item.value.items() %}
-                            <tr>
-                                <td><strong>{{ k|replace("_", " ")}}</strong></td>
-                                <td>{{ v }}</td>
-                            </tr>
-                                {% endfor %}
-                            </table>
+                            {{ item.annotation }}
+                            <br><br>
+                        {% elif type == "tag" %}  
+                            <span class="label label-info">{{ item.annotation }}</span>
                         {% else %}        
-                            {{ item.value }}
+                            {% include "plugins/%s.html" % type ignore missing %}
                         {% endif %}
-                        <br><br>
                     {% endfor %}
                     </div>
                 {% endfor %}
