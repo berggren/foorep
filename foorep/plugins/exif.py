@@ -15,6 +15,8 @@ class Exif(Plugin):
             exif.read()
         except IOError:
             return None
+        except AttributeError:
+            return None
         self.tags = exif.exif_keys
         result = {
             "type": "exif",
