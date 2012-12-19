@@ -3,10 +3,13 @@
 # See the file 'LICENSE.txt' for copying permission.
 
 from foorep import Plugin
-import pyexiv2
 
 class Exif(Plugin):
     def analyze(self, path):
+        try:
+            import pyexiv2
+        except ImportError:
+            return None
         try:
             exif = pyexiv2.ImageMetadata(path)
             exif.read()

@@ -21,30 +21,33 @@ except ImportError:
 class Repository:
     """Repository for forensic artifacts"""
     
-    def __init__(self, database='foorep', collection='repository'):
-        """Creates a new or use an existing database and collection in
-        MongoDB. Set up an instance of GridFS.
+    def __init__(self, host='127.0.0.1', port=27017, 
+                 database='foorep', collection='repository'):
+        """Creates a new or use an existing mongodb database and collection. 
+        Sets up an instance of GridFS for storing files.
 
         :Parameters:
-          - `database` (optional) Name of the MongoDB database
-          - `collection` (optional) Name of the collection
+          - `host` MongoDB host to connect to
+          - `port` MongoDB port
+          - `database` Name of the MongoDB database
+          - `collection` Name of the collection
         """
-        self.dbname = database
-        self.collname = collection
         try:
-            self.db = pymongo.Connection()[database]
+            self.db = pymongo.MongoClient(host=host, port=port)[database]
             self.collection = self.db[collection]
             self.fs = gridfs.GridFS(self.db)
         except pymongo.errors.ConnectionFailure:
             print("ERROR: Could not connect to collection %s on database %s" % (
-                    self.dbname, 
-                    self.collname))
+                    database, 
+                    collection))
             sys.exit()
+        # find plugins and import them
         plugin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"plugins")
         for path in glob.glob(os.path.join(plugin_dir,'[!_]*.py')): 
             name, ext = os.path.splitext(os.path.basename(path))
             imp.load_source(name, path)
         self.plugins = Plugin.get_plugins()
+    
     def _create_document(self, file=None, filepath=None, filename=None, gridfile=None):
         """Creates a dictionary based on the info of a file.
 

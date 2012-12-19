@@ -120,7 +120,6 @@ def main():
     webui.annotate = Annotate(repo)
     webui_conf = {
         '/': {
-            'tools.login_required.on': False,
         },
         '/static': {
             'tools.staticdir.on': True,
