@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='foorep',
-    version='0.1.1',
+    version='0.1.3',
     author='Johan Berggren',
     author_email='jbn@klutt.se',
     packages=['foorep', 'foorep.test'],
@@ -15,6 +15,7 @@ setup(
         "CherryPy==3.2.2",
         "Jinja2==2.6",
         "pefile==1.2.10-123",
+        "python-magic==0.4.3",
     ],
     include_package_data=True,
     package_data = {

@@ -56,7 +56,10 @@ class Repository:
         """
         stat = os.stat(filepath)
         if magic:
-            filetype = magic.from_file(filepath)
+            try:
+                filetype = magic.from_file(filepath)
+            except AttributeError:
+                filetype = 'N/A'
         else:
             filetype = 'N/A'
 
@@ -195,4 +198,5 @@ class PluginMount(type):
 class Plugin:
     __metaclass__ = PluginMount
 
-
+if __name__ == '__main__':
+    pass

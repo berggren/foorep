@@ -9,6 +9,7 @@ import tempfile
 import os
 import base64
 import re
+
 from foorep.restapi import ApiRoot, FileResource
 
 site_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"site")
