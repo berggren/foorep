@@ -140,6 +140,7 @@ def main():
     cherrypy.tree.mount(webui, '/', config=webui_conf)
     cherrypy.tree.mount(restapi, '/api/v1', config=restapi_conf)
     engine.start()
+    engine.block()
     
 if __name__ == "__main__":
     main()
