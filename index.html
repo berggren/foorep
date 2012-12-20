@@ -31,11 +31,38 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1></h1>
+        <h3>Ubuntu 12.04</h3>
 
-<h1>foorep</h1>
+<ol>
+<li>Install mongodb<br><code>$ sudo apt-get install mongodb</code><br>
+</li>
+<li>Install support for parsing exif<br><code>$ sudo apt-get install python-pyexiv2</code><br>
+</li>
+<li>Install foorep<br><code>$ sudo pip install foorep</code>
+</li>
+</ol><hr><h3>Ubuntu 10.04 and SIFT Workstation 2.14 (Ubuntu 9.10)</h3>
 
-<p>foorep is a malware repository. It uses mongoDB as it's backend.</p>
+<p>The provided version of mongodb in older Ubuntu is lacking some features that foorep depends on.
+Because of this we need to install mongodb from 10gens repository.</p>
+
+<ol>
+<li>Uninstall old mongodb<br><code>$ sudo apt-get remove mongodb</code><br>
+</li>
+<li>Add 10gen Ubuntu repository to sources.list<br><code>$ sudo echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" &gt;&gt; /etc/apt/sources.list</code><br>
+</li>
+<li>Add 10gen key<br><code>$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10</code>
+</li>
+<li>Update apt<br><code>$ sudo apt-get update</code><br>
+</li>
+<li>Install mongodb<br><code>$ sudo apt-get install mongodb-10gen</code><br>
+</li>
+<li>Install support for parsing exif<br><code>$ sudo apt-get install python-pyexiv2</code><br>
+</li>
+<li>Remove python-magic, the version bundled with Ubuntu is too old.<br><code>$ sudo apt-get remove python-magic</code><br>
+</li>
+<li>Install foorep<br><code>$ sudo pip install foorep</code><br>
+</li>
+</ol>
       </section>
     </div>
 
