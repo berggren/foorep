@@ -4,7 +4,7 @@ setup(
     name='foorep',
     version='0.1.3-1',
     author='Johan Berggren',
-e   author_email='jbn@klutt.se',
+    author_email='jbn@klutt.se',
     packages=['foorep', 'foorep.test'],
     url='http://foorensics.blogspot.com',
     license='LICENSE.txt',
