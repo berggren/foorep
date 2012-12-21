@@ -57,7 +57,7 @@ class Annotate:
         self.repo = repo
     @cherrypy.expose
     def default(self, uuid, type, value):
-        annotation = {"type": type, "annotation": value}
+        annotation = {"type": type, "data": value}
         self.repo.annotate(uuid, annotation)
         raise cherrypy.HTTPRedirect("/file/%s" % uuid)
 

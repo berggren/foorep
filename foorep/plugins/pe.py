@@ -41,8 +41,7 @@ class Pe(Plugin):
             return None
         result = {
             "type": "pe",
-            "name": "PEfile",
-            "annotation": {
+            "data": {
                     "overview": self._overview(pe, pefile),
                     "imports": self._imports(pe, pefile)
                 }

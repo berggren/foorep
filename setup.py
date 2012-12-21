@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='foorep',
-    version='0.1.3-1',
+    version='0.1.4',
     author='Johan Berggren',
     author_email='jbn@klutt.se',
     packages=['foorep', 'foorep.test'],

@@ -20,10 +20,9 @@ class Exif(Plugin):
         self.tags = exif.exif_keys
         result = {
             "type": "exif",
-            "name": "EXIF",
-            "annotation": {},
+            "data": {},
         }
         if self.tags:
             for tag in exif.exif_keys:
-                result['annotation'][tag.replace(".", "_")] = exif[tag].human_value
+                result['data'][tag.replace(".", "_")] = exif[tag].human_value
         return result 

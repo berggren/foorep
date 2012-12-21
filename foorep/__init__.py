@@ -140,7 +140,7 @@ class Repository:
         document = self.get(id)
         annotations = document.get('annotations')
         new_annotation = annotations.setdefault(annotation.get('type'), [])
-        new_annotation.append({"created": datetime.datetime.now(), "annotation": annotation.get('annotation')})
+        new_annotation.append({"created": datetime.datetime.now(), "data": annotation.get('data')})
         self.collection.save(document)
         return True
 
