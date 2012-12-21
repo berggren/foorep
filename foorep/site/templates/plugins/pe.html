@@ -1,5 +1,5 @@
 <table class="table table-striped table-bordered">
-    {% for k, v in item.annotation.overview.items() %}
+    {% for k, v in item.data.overview.items() %}
         <tr>
             <td><strong>{{ k|replace("_", " ")}}</strong></td>
             <td>{{ v }}</td>
@@ -10,7 +10,7 @@
         <h3>Imports</h3>
 
 <table class="table table-striped table-bordered">
-    {% for k, v in item.annotation.imports.items() %}
+    {% for k, v in item.data.imports.items() %}
         <tr>
             <td><strong>{{ k|replace("_", ".")}}</strong></td>
             <td>
