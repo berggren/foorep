@@ -2,7 +2,4 @@ v0.1.0, 2012-12-14 -- First release.
 v0.1.1, 2012-12-18 -- Updated webUI and better plugin handling
 v0.1.2, 2012-12-19 -- Some workaround for buggy Ubuntu 10.04
 v0.1.3, 2012-12-20 -- Handle old version of python-magic. New UI
-v0.1.3-1, 2012-12-20 -- Bugfix for python 2.6 and cherrypy not starting
-v0.1.3-2, 2012-12-20 -- Typo in setup.py, fixed by adalu
 v0.1.4, 2012-12-21 -- Change structure of annotation. More generic now
-v0.1.4-1, 2012-12-21 -- Bug in setup.py fixed
