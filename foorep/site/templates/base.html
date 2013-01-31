@@ -2,58 +2,43 @@
 <html>
 <head>
     <title>foorep</title>
-    <link 
-        rel='stylesheet' 
-        type='text/css'
-        href='/static/bootstrap/css/bootstrap.min.css'>
-    <link 
-        rel='stylesheet' 
-        type='text/css'
-        href='/static/css/style.css'>
-    <script
-        type="text/javascript" 
-        language="javascript"
-        src="/static/js/jquery-1.8.3.min.js">
-    </script>
-    <script
-        type="text/javascript" 
-        language="javascript" 
-        src="/static/bootstrap/js/bootstrap.min.js">
-    </script>
+    <link rel='stylesheet' type='text/css' href='/static/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='/static/css/style.css'>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <ul>
-                        <li>
-                            <a style="text-decoration:none;" href="/"><span class="logo">foo<em>rep</em></span></a>
-                        </li>
-                        <li>
-                            <div style="margin-top:-5px;">
-                                <form action="/search">
-                                    <input 
-                                        style="margin-left:0px;margin-right:5px;"
-                                        type="text", 
-                                        class="searchinput" 
-                                        name="q">
-                                    <input
-                                        style="margin-top:-11px;" 
-                                        type="submit" 
-                                        class="btn" 
-                                        value="Search">
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+    <div id="top">
+         <div class="container">
+            <div class="span12">
+                <div class="row">
+                    <a href="/"><img src="/static/img/logo.png"></a>
                 </div>
             </div>
         </div>
     </div>
-        <div id="main">
-    {% block main %}{% endblock %}
-</div>
+
+    
+    <div id="header">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div style="margin-top:10px;">
+                        <div class="input-append">
+                            <form action="/search">
+                                <input type="text" placeholder="Search" class="span8" name="q">
+                                <button style="width:81px;" class="btn" type="submit"><i class="icon-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        {% block main %}{% endblock %}
+    </div>
 </body>
 </html>
+                        

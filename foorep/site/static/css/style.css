@@ -9,47 +9,37 @@
 
 body {
     font-family: Trebuchet MS, Helvetica, Arial;
+    background: #fbfbfb;
 }   
 
+#top {
+    background:#fbfbfb url(/static/img/bg.png) repeat;
+    height: 50px;
+    color:#fff;
+    padding-top:10px;
+}
+
+.card-header {
+    background:#333;
+    color:#fff;
+    height:30px;
+}
+
 #header {
-    margin-bottom:20px;
-    background: #2b434f;
-    border-bottom: 5px solid #638270;
-}
-
-#header ul {
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#header ul li {
-    height: 40px;
-    float: left;
-    margin: 20px 10px 0 0;
-    padding: 0;
-}
-
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
+    background: #f1f1f1;
+    border-bottom: 1px solid #e1e1e1;
+    height: 50px;
 }
 
 .logo {
     font-weight: normal;
-    color: white;
+    color: #fff;
+    color:#444;    
+    #color:#bf2726;
     text-decoration:none;
     font-size: 22px;
-}
-
-.logo em {
-    font-style: normal;
-    color: #CE2;
-}
-
-.searchinput {
-    width: 500px;
+    margin-top:-8px;
+    margin-left:35px;
 }
 
 .reslink {
@@ -61,5 +51,25 @@ li {
 
 .tablink {
     color:#333;
+}
+
+.card {
+    padding:30px;
+    background:#fff;
+    border:1px solid #e1e1e1;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.table {
+    background:#fff;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover
+{
+    color:#bf2726;
+    font-weight:bold;
 }
 

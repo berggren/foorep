@@ -2,22 +2,10 @@
 <html>
 <head>
     <title>foorep</title>
-    <link 
-        rel='stylesheet' 
-        type='text/css'
-        href='/static/bootstrap/css/bootstrap.min.css'>
-    <link 
-        rel='stylesheet' 
-        type='text/css'
-        href='/static/css/style.css'>
-    <script
-        type="text/javascript" 
-        language="javascript" 
-        src="bootstrap/js/bootstrap.min.js"></script>
-    <script
-        type="text/javascript" 
-        language="javascript"
-        src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='/static/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='/static/css/style.css'>
+    <script type="text/javascript" language="javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/static/js/jquery-1.8.3.min.js"></script>
     <script>
         $(document).ready(function(){
             $(".upload-link").click(function(){
@@ -31,15 +19,21 @@
     </script>
 </head>
 <body>
+    <div id="top">
+         <div class="container">
+            <div class="span12">
+                <div class="row" style="text-align:center;">
+                    <a href="/"><img src="/static/img/logo3.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="span12">
-                <div id="main">
-                    <br><br><br><br><br>
+                <div id="main" class="card">
+                    <br><br><br>
                     <div style="text-align:center;">
-                        <span class="logo" style="font-size:58px;color:#444">   foo<em>rep</em>
-                        </span>
-                        <br><br>
                         <form action="/search">
                             <input 
                                 class="searchinput" 
@@ -50,10 +44,10 @@
                             <input 
                                 type="submit" 
                                 class="btn" 
-                                value="Search">
+                                value="foorep Search">
                             <br>
                         </form>
-                        You can also <a href="#" class="upload-link">upload</a> new malware samples
+                        You can also <a href="#" class="upload-link">upload</a> new samples
                         <br><br>
                         <div class="upload hide">
                             <form action="upload" method="post" enctype="multipart/form-data">
@@ -75,3 +69,4 @@
         </div>
 </body>
 </html>
+    

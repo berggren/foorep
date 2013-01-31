@@ -27,10 +27,10 @@ class Repository:
         Sets up an instance of GridFS for storing files.
 
         :Parameters:
-          - `host` MongoDB host to connect to
-          - `port` MongoDB port
-          - `database` Name of the MongoDB database
-          - `collection` Name of the collection
+          - `host` mongoDB host
+          - `port` mongoDB port
+          - `database` mongoDB database
+          - `collection` mongodb collection
         """
         try:
             self.db = pymongo.MongoClient(host=host, port=port)[database]
@@ -41,23 +41,23 @@ class Repository:
                     database, 
                     collection))
             sys.exit()
-        # find plugins and import them
+        # find plugins
         plugin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"plugins")
         for path in glob.glob(os.path.join(plugin_dir,'[!_]*.py')): 
             name, ext = os.path.splitext(os.path.basename(path))
             imp.load_source(name, path)
         self.plugins = Plugin.get_plugins()
     
-    def _create_document(self, file=None, filepath=None, filename=None, gridfile=None):
+    def _create_document(self, fbuf=None, fpath=None, fname=None, gridfile=None):
         """Creates a dictionary based on the info of a file.
 
         :Parameters:
           - `fh` File-like object with read() function
         """
-        stat = os.stat(filepath)
+        stat = os.stat(fpath)
         if magic:
             try:
-                filetype = magic.from_file(filepath)
+                filetype = magic.from_file(fpath)
             except AttributeError:
                 filetype = 'N/A'
         else:
@@ -68,14 +68,14 @@ class Repository:
             "file": gridfile,
             "user": None,
             "meta": {
-                "filename": filename,
+                "filename": fname,
                 "filetype": filetype,
                 "filesize": stat.st_size,
                 "hash": {
-                    "md5": hashlib.md5(file).hexdigest(),
-                    "sha1": hashlib.sha1(file).hexdigest(),
-                    "sha256": hashlib.sha256(file).hexdigest(),
-                    "sha512": hashlib.sha512(file).hexdigest(),
+                    "md5": hashlib.md5(fbuf).hexdigest(),
+                    "sha1": hashlib.sha1(fbuf).hexdigest(),
+                    "sha256": hashlib.sha256(fbuf).hexdigest(),
+                    "sha512": hashlib.sha512(fbuf).hexdigest(),
                     "ssdeep": None
                     },
                 },
@@ -102,9 +102,9 @@ class Repository:
 
         gridfile = self.fs.put(filebuffer,
                 filename=filename)
-        document = self._create_document(file=filebuffer, 
-                filepath=filepath,
-                filename=filename,
+        document = self._create_document(fbuf=filebuffer, 
+                fpath=filepath,
+                fname=filename,
                 gridfile=gridfile)
         self.collection.insert(document)
         for plugin in self.plugins:

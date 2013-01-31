@@ -6,7 +6,7 @@
                 $(".annotation").toggle();
             });
             $(".show-detail").click(function(){
-                $(".detail").toggle();
+                $(".detail").toggle("fast");
             });
         });
     </script>
@@ -15,8 +15,12 @@
 {% block main %}
 <div class="container">
     <div class="row">
-        <div class="span">            
-            <table class="table table-striped">
+        <div class="span9">           
+            <div class="card" style="border-top:0;">
+                <!-- <p class="lead" style="font-size:1.2em;">
+                </p>-->
+
+                <table class="table table-bordered">
                 <tr>
                     <td><strong>Filename<strong></td>
                     <td>{{ file.meta.filename }}</td>
@@ -30,10 +34,6 @@
                     <td>{{ file.meta.filetype }}</td>
                 </tr>
             </table>
-            <a class="show-detail btn" href="#">Toggle detailed view</a>
-            <a class="btn" href="/download/{{ file.uuid }}/"><i class="icon-download-alt"></i> Download</a>
-            <a class="btn add-annotation" href="#"><i class="icon-edit"></i> Annotate</a>
-            <br><br>
             <div class="annotation hide well">
                 <form action="/annotate/{{ file.uuid }}" method="post">
                 <label class="checkbox">
@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td><strong>sha512</strong></td>
-                        <td>{{ file.meta.hash.sha512|truncate(80, True) }}</td>
+                        <td>{{ file.meta.hash.sha512|truncate(70, True) }}</td>
                     </tr>
                     <tr>
                         <td><strong>ssdeep</strong></td>
@@ -75,6 +75,15 @@
                     </tr>
                 </table>
             </div>
+
+            <span class="show-detail btn">Toggle detailed view</span>
+            <a class="btn" style="text-decoration:none;" href="/download/{{ file.uuid }}/"><i class="icon-download-alt"></i> Download</a>
+            <span class="btn add-annotation" href="#"><i class="icon-edit"></i> Annotate</span>
+        
+        </div>
+            <br>
+            
+            <div class="card"> 
             <ul class="nav nav-tabs">
                 {% for type in file.annotations %}
                     {% if loop.index == 1 %}
@@ -102,13 +111,13 @@
                         <div class="tab-pane" id="{{ type }}">
                     {% endif %}
                     {% for item in annotation %}
-                        {% if type == "comment" %}
-                            {% if item.created %}
-                                {{ item.created|datetimeformat }}
-                            {% endif %}
-                            <br>
-                            {{ item.data }}
-                            <br><br>
+                    {% if type == "comment" %}
+                        <div class="media">
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ item.created|datetimeformat }}</h4>
+                                {{ item.data }}
+                            </div>
+                        </div>
                         {% elif type == "tag" %}  
                             <span class="label label-info">{{ item.data }}</span>
                         {% else %}        
@@ -124,6 +133,19 @@
                     </div>
                 {% endif %}                    
             </div>
+       
         </div>
+        </div>
+
+        <div class="row">
+            <div class="span3">
+                <div class="card" style="border-top:0;">
+                 <p>
+                This is a placeholder.
+                 </p>
+                </div>
+            </div>
+        </div>
+                
     </div>
 {% endblock %}

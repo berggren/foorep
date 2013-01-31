@@ -3,16 +3,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="span12">
+        <div class="span9">
+            <div class="card" style="border-top:0;">
             {% if not result %}
                 No result
             {% endif %}
-            {% for malware in result %}
-                <a class="reslink" href="/file/{{ malware.uuid }}/">{{ malware.meta.filename }}</a>
+            {% for sample in result %}
+                <a class="reslink" href="/file/{{ sample.uuid }}/">{{ sample.meta.filename }}</a>
                 <br>
-                {{ malware.meta.hash.sha1 }}
+                <span style="color:silver;">/file/{{ sample.uuid }}</span>
+                <br>
+                <strong>Type:</strong> {{ sample.meta.filetype }}
+                <br>
+                <strong>sha1:</strong> {{ sample.meta.hash.sha1 }}
                 <br><br>
             {% endfor %}        
+            </div>
         </div>
     </div>
 </div>
