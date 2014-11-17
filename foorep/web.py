@@ -52,6 +52,15 @@ class Search:
         result = self.repo.search(q)
         return tmpl.render(result=result)
 
+class List:
+    def __init__(self, repo):
+        self.repo = repo
+    @cherrypy.expose
+    def index(self):
+        tmpl = env.get_template('result.html')
+        result = self.repo.find()
+        return tmpl.render(result=result)
+
 class Annotate:
     def __init__(self, repo):
         self.repo = repo
