@@ -16,6 +16,14 @@
                 <strong>Type:</strong> {{ sample.meta.filetype }}
                 <br>
                 <strong>sha1:</strong> {{ sample.meta.hash.sha1 }}
+                <br>
+                {% for type, annotation in sample.annotations.items() %}
+                    {% for item in annotation %}
+                        {% if type == "tag" %}  
+                            <span class="label label-info">{{ item.data }}</span>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
                 <br><br>
             {% endfor %}        
             </div>

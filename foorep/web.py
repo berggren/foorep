@@ -52,6 +52,15 @@ class Search:
         result = self.repo.search(q)
         return tmpl.render(result=result)
 
+class List:
+    def __init__(self, repo):
+        self.repo = repo
+    @cherrypy.expose
+    def index(self):
+        tmpl = env.get_template('result.html')
+        result = self.repo.list()
+        return tmpl.render(result=result)
+
 class Annotate:
     def __init__(self, repo):
         self.repo = repo
@@ -115,6 +124,7 @@ def main():
     # Start WebUI
     webui = App()
     webui.search = Search(repo)
+    webui.list = List(repo)
     webui.file = File(repo)
     webui.download = Download(repo)
     webui.upload = Upload(repo)
